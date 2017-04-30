@@ -1,6 +1,7 @@
 # How to use
 ## Create subscription
 Example of adding new subscription
+
 Required fields:
 + id
 + url
@@ -22,6 +23,7 @@ As a result, the database will have added a new subscription
 
 ## Request update
 Give id of user you want update for
+
 ex: Get update for subscriptions of user 1 given database below
 
 http://sample-env-1.cegpykp7aq.us-east-1.elasticbeanstalk.com/?userid=1
