@@ -6,6 +6,8 @@ Required fields:
 + userid
 + url
 + elementid
++ elementclass
++ elementname
 + currentvalue
 + update = 0
 
