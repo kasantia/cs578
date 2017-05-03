@@ -10,6 +10,7 @@ Required fields:
 + elementname
 + currentvalue
 + update = 0
++ delete = 0
 
 Send POST request to: http://sample-env-1.cegpykp7aq.us-east-1.elasticbeanstalk.com/
 

@@ -21,21 +21,23 @@
         if ($result->num_rows > 0) 
         {
             $counter = 0;
+            $results = array();
             while($row = $result->fetch_assoc()) 
             {
                 // check if this row is this user's subscription and if it's modified
                 if($row["modified"] == 1) {
-                    $data[$counter] = array("url" => $row["url"], "elementid" => $row["elementid"]);
+                    $results[$counter] = array("url" => $row["url"], "elementid" => $row["elementid"]);
                     $counter++;
                     $data["modified"] = "true";
                 }
             }
+            $data["results"] = $results;
             
             // set modified to false for this user's modified subscriptions
             $sql = "UPDATE subscriptions SET modified = 0 WHERE userid = $userid";
             if($conn->query($sql) === TRUE) 
             {
-                echo "Record updated successfully";
+                //echo "Record updated successfully";
             } 
             else 
             {
@@ -66,6 +68,21 @@
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
        }
+       else if ($_POST['delete'] == "1")
+       {
+            $userid = $_POST['userid'];
+            $url = $_POST['url'];
+            $elementid = $_POST['elementid'];
+            $sql = "DELETE FROM subscriptions WHERE userid=$userid AND url=\"$url\" AND elementid = \"$elementid\"";
+            if ($conn->query($sql) === TRUE) 
+            {
+                echo "Subscription deleted successfully";
+            } 
+            else
+            {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+       }
        else
        {
            // create new subscription
@@ -75,9 +92,8 @@
             $elementClass = $_POST['elementclass'];
             $elementId = $_POST['elementid'];
             $currentValue = $_POST['currentvalue'];
-            $elementName = $_POST['elementname'];
             
-            $sql = "INSERT INTO subscriptions (userid, url, elementname, elementclass, elementid, currentvalue, modified) VALUES \"$userid\", \"$url\", \"$elementName\", \"$elementClass\", \"$elementId\", \"$currentValue\", false)";
+            $sql = "INSERT INTO subscriptions (userid, url, elementname, elementclass, elementid, currentvalue, modified) VALUES ($userid, '$url', '$elementName', '$elementClass', '$elementId', '$currentValue', 0)";
             if ($conn->query($sql) === TRUE) 
             {
                 echo "New record created successfully";
