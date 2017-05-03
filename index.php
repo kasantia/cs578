@@ -96,8 +96,9 @@
             $sql = "INSERT INTO subscriptions (userid, url, elementname, elementclass, elementid, currentvalue, modified) VALUES ($userid, '$url', '$elementName', '$elementClass', '$elementId', '$currentValue', 0)";
             if ($conn->query($sql) === TRUE) 
             {
-                echo "New record created successfully";
-            } 
+                $response = array();
+                $response['subscriptionid'] = $conn->insert_id;
+                echo json_encode($response);            } 
             else
             {
                 echo "Error: " . $sql . "<br>" . $conn->error;
