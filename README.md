@@ -42,8 +42,20 @@ After the changed subscriptions are identified, the modified fields of those sub
 +------+--------------------------------------------------+---------+------------+-----------+--------+
 </pre>
 
+## Delete subscription - POST request
+#### Intended to be used by extension.
+
+Required fields:
++ userid
++ url
++ elementid
++ delete = 1
++ update = 0
+
+Send POST request to: http://sample-env-1.cegpykp7aq.us-east-1.elasticbeanstalk.com/
+
 ## Update Modified - POST request
-#### Intended to be used by backend
+#### Intended to be used by backend.
 
 This will set the "modified" value to 1 of the given subscription and update the current value. 
 
